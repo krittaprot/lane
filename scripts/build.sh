@@ -1,10 +1,10 @@
 #!/bin/bash
-# Builds build/Lane.app. Run from anywhere; paths are relative to the project root.
+# Builds build/Lane.app as a universal (Apple Silicon + Intel) app. Run from anywhere; paths are relative to the project root.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-swift build -c release
-BIN="$(swift build -c release --show-bin-path)/Lane"
+swift build -c release --arch arm64 --arch x86_64
+BIN="$(swift build -c release --arch arm64 --arch x86_64 --show-bin-path)/Lane"
 
 APP=build/Lane.app
 rm -rf "$APP"
